@@ -3,13 +3,13 @@ import os
 import sys
 ruta = os.path.abspath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(ruta)
-from src.blockchain import Bloque
+from src.blockchain import Bloque, Blockchain
 
 class Test(unittest.TestCase):
     def test(self):
-        test = Bloque("stefano.simoni.10.xg@gmail.com", "Certificado", "txt")
-        self.assertEqual(test.archivo, "txt")
-        self.assertEqual(test.email, "stefano.simoni.10.xg@gmail.com")
+        test = Blockchain()
+        self.assertEqual(test.cadena[0].email, "")
+        self.assertTrue(test.cadena[0].hashBlq)
     
 if __name__ == '__main__':
     unittest.main()
