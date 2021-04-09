@@ -28,7 +28,7 @@ class Test(unittest.TestCase):
 
     def test_bloqueGenesis_hashBlq_debe_ser_verdad_cuando_hashBlq_es_igual_a_lo_que_devuelve_traeHashBloque(self):
         test = Blockchain()
-        self.assertEqual(test.cadena[0].hashBlq, test.traeHashBloque(0))
+        self.assertEqual("32448a9a2e0b20a10125aa5a1ebdb9eac8520b70bdea10450dbf0fd052f528a6", test.traeHashBloque(0))
     
 if __name__ == '__main__':
     unittest.main()
