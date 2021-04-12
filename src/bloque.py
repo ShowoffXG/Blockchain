@@ -1,14 +1,13 @@
-from datetime import datetime
 from hashlib import sha256
 import json
 
 class Bloque:
-    def __init__(self, i, email, motivo, hashArch, hashAnt):
+    def __init__(self, i, email, motivo, hashArch, tiempo, hashAnt):
         self.i = i
         self.email = email
         self.motivo = motivo
         self.hashArch = hashArch
-        #self.tiempo = datetime.now()
+        self.tiempo = tiempo
         self.hashAnt = hashAnt
         self.hashBlq = self.crearHash()
 
