@@ -1,31 +1,36 @@
 from datetime import datetime
 from src.bloque import Bloque
+from src.singleton import Singleton
 
-class Blockchain:
+class Blockchain(metaclass = Singleton):
     def __init__(self):
-        self.cadena = []
-        self.crearGenesis()
+        self.__zero_count = 0
+        self.__cadena = []
+        self.__crearGenesis()
 
-    def crearGenesis(self):
-        bloqueGenesis = Bloque(0, "", "", "0", "2021-04-12 12:00:00", "0")
-        self.cadena.append(bloqueGenesis)
+    def __crearGenesis(self):
+        bloqueGenesis = Bloque(0, "", "", "0", "2021-04-12 12:00:00", "0", self.__zero_count)
+        self.__cadena.append(bloqueGenesis)
 
-    def crearBloque(self, email, motivo, hashArch):
-        bloqueNuevo = Bloque(self.bloqueSig(), email, motivo, hashArch, "2021-04-12 13:00:00", self.traeHashAnt())
-        self.cadena.append(bloqueNuevo)
+    def __crearBloque(self, email, motivo, hashArch):
+        bloqueNuevo = Bloque(self.__bloqueSig(), email, motivo, hashArch, "2021-04-12 13:00:00", self.__traeHashAnt(), self.__zero_count)
+        self.__cadena.append(bloqueNuevo)
 
     def traeHashBloque(self, i):
-        return self.cadena[i].hashBlq
+        return self.__cadena[i].hashBlq
 
-    def bloqueSig(self):
-        return len(self.cadena)
+    def __bloqueSig(self):
+        return len(self.__cadena)
 
-    def traeHashAnt(self):
-        return self.traeHashBloque(self.bloqueSig()-1)
+    def __traeHashAnt(self):
+        return self.traeHashBloque(self.__bloqueSig()-1)
 
-    def getDateTimeString(self):
+    def __getDateTimeString(self):
         dt = datetime.now()
         return dt.isoformat()
 
-    def getFormatDate(self, tiempo):
+    def __getFormatDate(self, tiempo):
         return datetime.strptime(tiempo, '%Y-%m-%d %H:%M:%S')
+
+    def getBloquePorId(self, i):
+        return self.__cadena[i]
