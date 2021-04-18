@@ -30,3 +30,5 @@ class Bloque:
     def crearHash(self):
         hash = json.dumps(self.__dict__, sort_keys=True)
         return sha256(hash.encode()).hexdigest()
+
+    

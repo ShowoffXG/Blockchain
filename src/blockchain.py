@@ -12,8 +12,12 @@ class Blockchain(metaclass = Singleton):
         bloqueGenesis = Bloque(0, "", "", "0", "2021-04-12 12:00:00", "0", self.__zero_count)
         self.__cadena.append(bloqueGenesis)
 
-    def __crearBloque(self, email, motivo, hashArch):
-        bloqueNuevo = Bloque(self.__bloqueSig(), email, motivo, hashArch, "2021-04-12 13:00:00", self.__traeHashAnt(), self.__zero_count)
+    def __crearBloque(self, email, motivo, hashArch, tiempo):
+        bloqueNuevo = Bloque(self.__bloqueSig(), email, motivo, hashArch, tiempo, self.__traeHashAnt(), self.__zero_count)
+        self.__cadena.append(bloqueNuevo)
+
+    def crearBloque(self, email, motivo, hashArch):
+        bloqueNuevo = Bloque(self.__bloqueSig(), email, motivo, hashArch, datetime.utcnow, self.__traeHashAnt(), self.__zero_count)
         self.__cadena.append(bloqueNuevo)
 
     def traeHashBloque(self, i):
@@ -23,14 +27,32 @@ class Blockchain(metaclass = Singleton):
         return len(self.__cadena)
 
     def __traeHashAnt(self):
-        return self.traeHashBloque(self.__bloqueSig()-1)
+        return self.traeHashBloque(self.__bloqueSig() - 1)
 
-    def __getDateTimeString(self):
-        dt = datetime.now()
-        return dt.isoformat()
+    def traeBlqXHash(self, hashBlq):
+        for bloque in self.__cadena:
+            if hashBlq == bloque.hashBlq:
+                return bloque
+        return "No se encontro el Bloque mediante el hash ofrecido"
 
-    def __getFormatDate(self, tiempo):
-        return datetime.strptime(tiempo, '%Y-%m-%d %H:%M:%S')
+    def mostrarBlockchain(self):
+        print ("Blockchain")
+        for i in range(self.__bloqueSig()):
+            print ("Registro unico de documentacion")
+            print ("Se registro correctamente el documento")
+            print ("A nombre de: %s", self.__cadena[i].email)
+            print ("Motivo: %s", self.__cadena[i].motivo)
+            print ("Fecha: %s", self.__cadena[i].tiempo)
+            print ("Hash del Bloque: %s", self.__cadena[i].hashBlq)
+
+    def mostrar(self, i):
+        print ("Bloque %d", i)
+        print ("Registro unico de documentacion")
+        print ("Se registro correctamente el documento")
+        print ("A nombre de: %s", self.__cadena[i].email)
+        print ("Motivo: %s", self.__cadena[i].motivo)
+        print ("Fecha: %s", self.__cadena[i].tiempo)
+        print ("Hash del Bloque: %s", self.__cadena[i].hashBlq)
 
     def getBloquePorId(self, i):
         return self.__cadena[i]
