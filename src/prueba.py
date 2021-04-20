@@ -25,6 +25,13 @@ def menu():
         elif opcionMenu == 2:
             mostrarBlockchain(bc)
             atras()
+        elif opcionMenu == 3:
+            mostrar(bc)
+            atras()
+        elif opcionMenu == 0:
+            exit(1)
+        else:
+            menu()
 
 def registrarCertif(blockchain):
     os.system("CLS")
@@ -50,31 +57,38 @@ def atras():
     menu()
 
 def mostrarBlockchain(blockchain):
+    os.system("CLS")
     print ("Blockchain")
     bloqueFinal = blockchain.getBloquePorId(-1).i
-    for i in range(0, bloqueFinal):
+    print ("Registro unico de documentacion")
+    for i in range(0, bloqueFinal + 1):
         bloque = blockchain.getBloquePorId(i)
         if i == 0:
             dash()
-            print ("Registro unico de documentacion")
             print ("Bloque 0/Genesis:")
             print ("Hash del Bloque:", bloque.hashBlq)
         else:
             dash()
-            print ("Registro unico de documentacion")
             print ("Bloque:", i)
             print ("A nombre de:", bloque.email)
             print ("Motivo:", bloque.motivo)
             print ("Fecha:", bloque.tiempo)
             print ("Hash del Bloque:", bloque.hashBlq)
 
-def mostrar(blockchain, i):
-    bloque = blockchain.getBloquePorId(i)
-    print ("Bloque", bloque.i)
-    print ("Registro unico de documentacion")
-    print ("A nombre de:", bloque.email)
-    print ("Motivo:", bloque.motivo)
-    print ("Fecha:", bloque.tiempo)
-    print ("Hash del Bloque:", bloque.hashBlq)
+def mostrar(blockchain):
+    os.system("CLS")
+    hash = str(input("Hash del certificado que busca: "))
+    bloque = blockchain.traeBlqXHash(hash)
+    if  hash == blockchain.traeHashBloque(0):
+        dash()
+        print ("Registro unico de documentacion")
+        print ("Bloque 0/Genesis:")
+    else:
+        dash()
+        print ("Registro unico de documentacion")
+        print ("Bloque", bloque.i)
+        print ("A nombre de:", bloque.email)
+        print ("Motivo:", bloque.motivo)
+        print ("Fecha:", bloque.tiempo)
 
 menu()
