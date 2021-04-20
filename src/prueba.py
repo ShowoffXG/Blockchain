@@ -8,6 +8,7 @@ bc = Blockchain()
 
 def menu():
     os.system("CLS")
+    dash()
     print("Universidad de la Cuenca del Plata")
     dash()
     print("\t1 - Registrar certificado")
@@ -20,12 +21,15 @@ def menu():
         menu()
     while True:
         if opcionMenu == 1:
+            os.system("CLS")
             registrarCertif(bc)
             atras()
         elif opcionMenu == 2:
+            os.system("CLS")
             mostrarBlockchain(bc)
             atras()
         elif opcionMenu == 3:
+            os.system("CLS")
             mostrar(bc)
             atras()
         elif opcionMenu == 0:
@@ -34,7 +38,6 @@ def menu():
             menu()
 
 def registrarCertif(blockchain):
-    os.system("CLS")
     print("Registro unico de documentacion")
     dash()
     print("Ingrese los datos requeridos")
@@ -48,7 +51,7 @@ def registrarCertif(blockchain):
     print(blockchain.traeHashBloque(-1))
 
 def dash():
-    dash = '-' * 64
+    dash = '-' * 96
     print(dash)
 
 def atras():
@@ -57,38 +60,41 @@ def atras():
     menu()
 
 def mostrarBlockchain(blockchain):
-    os.system("CLS")
-    print ("Blockchain")
     bloqueFinal = blockchain.getBloquePorId(-1).i
-    print ("Registro unico de documentacion")
+    print("Registro unico de documentacion")
     for i in range(0, bloqueFinal + 1):
         bloque = blockchain.getBloquePorId(i)
         if i == 0:
             dash()
-            print ("Bloque 0/Genesis:")
-            print ("Hash del Bloque:", bloque.hashBlq)
+            print("Bloque 0/Genesis:")
+            print("Hash del Bloque:", bloque.hashBlq)
         else:
             dash()
-            print ("Bloque:", i)
-            print ("A nombre de:", bloque.email)
-            print ("Motivo:", bloque.motivo)
-            print ("Fecha:", bloque.tiempo)
-            print ("Hash del Bloque:", bloque.hashBlq)
+            print("Bloque:", i)
+            print("A nombre de:", bloque.email)
+            print("Motivo:", bloque.motivo)
+            print("Fecha:", bloque.tiempo)
+            print("Hash del Bloque:", bloque.hashBlq)
 
 def mostrar(blockchain):
-    os.system("CLS")
     hash = str(input("Hash del certificado que busca: "))
     bloque = blockchain.traeBlqXHash(hash)
     if  hash == blockchain.traeHashBloque(0):
         dash()
-        print ("Registro unico de documentacion")
-        print ("Bloque 0/Genesis:")
-    else:
+        print("Registro unico de documentacion")
         dash()
-        print ("Registro unico de documentacion")
-        print ("Bloque", bloque.i)
-        print ("A nombre de:", bloque.email)
-        print ("Motivo:", bloque.motivo)
-        print ("Fecha:", bloque.tiempo)
+        print("Bloque 0/Genesis")
+    else:
+        try:
+            dash()
+            print("Registro unico de documentacion")
+            dash()
+            print("Bloque", bloque.i)
+            print("A nombre de:", bloque.email)
+            print("Motivo:", bloque.motivo)
+            print("Fecha:", bloque.tiempo)
+        except AttributeError:
+            dash()
+            print("No se encontro el Bloque mediante el hash ofrecido")
 
 menu()
