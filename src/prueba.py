@@ -94,7 +94,6 @@ def mostrar(blockchain):
             print("Motivo:", bloque.motivo)
             print("Fecha:", bloque.tiempo)
         except AttributeError:
-            dash()
             print("No se encontro el Bloque mediante el hash ofrecido")
 
 menu()
