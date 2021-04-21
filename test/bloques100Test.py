@@ -14,7 +14,7 @@ class Bloques100Test(unittest.TestCase):
         bloque49 = test.getBloquePorId(49)
         bloque50 = test.getBloquePorId(50)
         self.assertEqual(bloque50.hashAnt, bloque49.hashBlq)
-        bloque = Bloque(50, "alguien@gmail.com", "test", "hashArch", "2021-04-12 13:00:00", test.getBloquePorId(49).hashBlq, 0)
+        bloque = Bloque(50, "alguien@gmail.com", "test", "hashArch", "2021-04-12 13:00:00", bloque49.hashBlq, 0)
         self.assertEqual(bloque.hashBlq, bloque50.hashBlq)
 
 if __name__ == '__main__': unittest.main()
