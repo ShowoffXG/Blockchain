@@ -5,7 +5,7 @@ from datetime import datetime
 
 class Bloque:
     def __init__(self, i, email, motivo, hashArch, tiempo, hashAnt, zero_count):        #Constructor de la clase Bloque
-        self.nonce = 0
+        self.nonce = 1      #Contador que ira cambiando su valor hasta que se encuentre el hash deseado
         self.i = i      #Indice del bloque
         self.email = email
         self.motivo = motivo
@@ -20,10 +20,10 @@ class Bloque:
                 zero_count = 2
             else:       #Si es impar, sera un solo 0 al principio del hash
                 zero_count = 1
-        while self.nonce >= 0:      #Calculo para dar con el hash correspondiente
+        while self.nonce >= 1:      #Calculo para dar con el hash correspondiente
             hash = self.crearHash()     #Se crea el hash y se lo asigna a una variable
             if hash[0:zero_count] == '0' * zero_count:      #Si el hash desde su primer digito hasta el valor que indica la dificultad es igual a la cantidad de ceros que se busca, devuelve ese hash y sale del metodo
-                self.nonce = -1
+                self.nonce = 0
             else:       #Si no, seguira buscando hasta dar con el hash necesario
                 self.nonce += 1
         return hash

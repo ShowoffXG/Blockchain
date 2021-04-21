@@ -40,3 +40,6 @@ class Blockchain(metaclass = Singleton):
 
     def getBloquePorId(self, i):        #Metodo que devuelve un bloque x mediante su posicion en la Blockchain
         return self.__cadena[i]
+
+    def cambiarZero_count(self, zero_count):        #Metodo para cambiar el valor de la variable zero_count
+        self.__zero_count = zero_count

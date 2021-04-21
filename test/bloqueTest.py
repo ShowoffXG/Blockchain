@@ -16,5 +16,4 @@ class BloqueTest(unittest.TestCase):
             self.assertEqual("hashAnt", test.hashAnt)
             self.assertEqual("00d91aa5774a33f4da89c1ad502735f00e31ad756b3d9c5849dd9459ccef5ff1", test.hashBlq)
 
-if __name__ == '__main__':
-    unittest.main()
+if __name__ == '__main__': unittest.main()

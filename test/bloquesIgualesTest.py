@@ -11,5 +11,4 @@ class BloquesIgualesTest(unittest.TestCase):
             bloque2 = Bloque(3, "alguien@gmail.com", "test", "hashArch", "2021-04-12 13:00:00", "hashAnt", 0)
             self.assertEqual(bloque1.hashBlq, bloque2.hashBlq)
 
-if __name__ == '__main__':
-    unittest.main()
+if __name__ == '__main__': unittest.main()

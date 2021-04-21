@@ -11,5 +11,4 @@ class SingletonTest(unittest.TestCase):
             test2 = Blockchain()
             self.assertTrue(id(test1) == id(test2), "Test Singleton don't works")
 
-if __name__ == '__main__':
-    unittest.main()
+if __name__ == '__main__': unittest.main()

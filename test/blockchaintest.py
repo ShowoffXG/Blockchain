@@ -44,5 +44,4 @@ class BlockchainTest(unittest.TestCase):
         bloque1 = test.getBloquePorId(1)
         self.assertEqual(test.traeBlqXHash("003f2f68f8602962d2274a1beb6639c3b0c78b172fe04c9ef4e744d33a6d125b"), bloque1)
         
-if __name__ == '__main__': 
-    unittest.main()
+if __name__ == '__main__': unittest.main()
