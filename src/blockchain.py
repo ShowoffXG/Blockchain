@@ -43,3 +43,18 @@ class Blockchain(metaclass = Singleton):
 
     def cambiarZero_count(self, zero_count):        #Metodo para cambiar el valor de la variable zero_count
         self.__zero_count = zero_count
+
+    def validar(self):      #Metodo que validara cada uno de los bloques de la Blockchain y comparara si el hash del bloque x es igual al hashAnt del bloque y
+        hash = '0'      #Sabemos que el hashAnt del bloque Genesis es 0
+        for bloque in self.__cadena:        #Recorre la lista y va comparando los hashs
+            if bloque.hashAnt == hash:      #Si es verdad cambia el valor del hash para seguir comparando
+                hash = bloque.hashBlq
+            else:
+                return False
+        if self.ultimoBlq().hashBlq == hash:        #Como la variable hash va a almacenar el hash del ultimo bloque verificamos mediante el metodo ultimoBlq() si son iguales y devolvera bloolean
+            return True     #Si los hashs coinciden devuelve True
+        else:
+            return False        #Si no, devuelve False
+    
+    def ultimoBlq(self):        #Metodo que devolvera el ultimo bloque de la Blockchain
+        return self.__cadena[-1]

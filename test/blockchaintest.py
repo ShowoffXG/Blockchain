@@ -7,7 +7,7 @@ from src.blockchain import Blockchain
 
 test = Blockchain()
 test._Blockchain__crearBloque("alguien@gmail.com", "test", "hashArch", "2021-04-12 13:00:00")
-test._Blockchain__crearBloque("otro@gmail.com", "test2", "hashArch2", "2021-04-12 13:00:00")
+test._Blockchain__crearBloque("otro@gmail.com", "test2", "hashArch2", "2021-04-13 13:00:00")
 
 class BlockchainTest(unittest.TestCase):
     def test_bloqueGenesis_should_to_be_true_when_bloqueGenesis_is_created(self):
@@ -36,12 +36,20 @@ class BlockchainTest(unittest.TestCase):
         self.assertEqual("otro@gmail.com", bloque2.email)
         self.assertEqual("test2", bloque2.motivo)
         self.assertEqual("hashArch2", bloque2.hashArch)
-        self.assertEqual("2021-04-12 13:00:00", bloque2.tiempo)
+        self.assertEqual("2021-04-13 13:00:00", bloque2.tiempo)
         self.assertEqual("003f2f68f8602962d2274a1beb6639c3b0c78b172fe04c9ef4e744d33a6d125b", bloque2.hashAnt)
-        self.assertEqual("00877321b660e070e3940a5e96783e4382e3081a843a2a8a9d83b0482bbd2a2c", test.traeHashBloque(2))
+        self.assertEqual("08f5733f8d26f61ee8da55f8722cbdd70e245bdc042acc7925d25f6975caa36a", test.traeHashBloque(2))
 
     def test_giveBloque1ForHash_should_to_be_true_when_giveBloque1ForHash_works(self):
         bloque1 = test.getBloquePorId(1)
         self.assertEqual(test.traeBlqXHash("003f2f68f8602962d2274a1beb6639c3b0c78b172fe04c9ef4e744d33a6d125b"), bloque1)
+
+    def test_validar_should_to_be_true_when_blockchain_is_correctly(self):
+        self.assertTrue(test.validar(), "Blockchain is corrupted")
+
+    def test_ultimoBloque_should_to_be_true_when_bloque_have_id_negative_1(self):
+        hashBlq = test.ultimoBlq()
+        bloque = test.getBloquePorId(-1)
+        self.assertEqual(bloque, hashBlq)
         
 if __name__ == '__main__': unittest.main()
